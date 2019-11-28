@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.ProductinfoMapper" >
+  <resultMap id="BaseResultMap" type="entity.Productinfo" >
+    <id column="P_ID" property="pId" jdbcType="DECIMAL" />
+    <result column="P_CODE" property="pCode" jdbcType="DECIMAL" />
+    <result column="P_NAME" property="pName" jdbcType="VARCHAR" />
+    <result column="P_TYPE" property="pType" jdbcType="VARCHAR" />
+    <result column="BRAND" property="brand" jdbcType="VARCHAR" />
+    <result column="PIC" property="pic" jdbcType="VARCHAR" />
+    <result column="P_NUM" property="pNum" jdbcType="DECIMAL" />
+    <result column="PRICE" property="price" jdbcType="DECIMAL" />
+    <result column="SALE" property="sale" jdbcType="DECIMAL" />
+    <result column="INTRO" property="intro" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    P_ID, P_CODE, P_NAME, P_TYPE, BRAND, PIC, P_NUM, PRICE, SALE, INTRO, STATUS
+  </sql>
+
+  <select id="selectAllP_type" resultType="java.lang.String">
+    select distinct p_type from productinfo
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from PRODUCTINFO
+    where P_ID = #{pId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from PRODUCTINFO
+    where P_ID = #{pId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="entity.Productinfo" >
+    insert into PRODUCTINFO (P_ID, P_CODE, P_NAME, 
+      P_TYPE, BRAND, PIC, 
+      P_NUM, PRICE, SALE, 
+      INTRO, STATUS)
+    values (#{pId,jdbcType=DECIMAL}, #{pCode,jdbcType=DECIMAL}, #{pName,jdbcType=VARCHAR}, 
+      #{pType,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
+      #{pNum,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{sale,jdbcType=DECIMAL}, 
+      #{intro,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Productinfo" >
+    insert into PRODUCTINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        P_ID,
+      </if>
+      <if test="pCode != null" >
+        P_CODE,
+      </if>
+      <if test="pName != null" >
+        P_NAME,
+      </if>
+      <if test="pType != null" >
+        P_TYPE,
+      </if>
+      <if test="brand != null" >
+        BRAND,
+      </if>
+      <if test="pic != null" >
+        PIC,
+      </if>
+      <if test="pNum != null" >
+        P_NUM,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+      <if test="sale != null" >
+        SALE,
+      </if>
+      <if test="intro != null" >
+        INTRO,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        #{pId,jdbcType=DECIMAL},
+      </if>
+      <if test="pCode != null" >
+        #{pCode,jdbcType=DECIMAL},
+      </if>
+      <if test="pName != null" >
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pType != null" >
+        #{pType,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="pNum != null" >
+        #{pNum,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="sale != null" >
+        #{sale,jdbcType=DECIMAL},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.Productinfo" >
+    update PRODUCTINFO
+    <set >
+      <if test="pCode != null" >
+        P_CODE = #{pCode,jdbcType=DECIMAL},
+      </if>
+      <if test="pName != null" >
+        P_NAME = #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pType != null" >
+        P_TYPE = #{pType,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        BRAND = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        PIC = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="pNum != null" >
+        P_NUM = #{pNum,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null" >
+        PRICE = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="sale != null" >
+        SALE = #{sale,jdbcType=DECIMAL},
+      </if>
+      <if test="intro != null" >
+        INTRO = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where P_ID = #{pId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.Productinfo" >
+    update PRODUCTINFO
+    set P_CODE = #{pCode,jdbcType=DECIMAL},
+      P_NAME = #{pName,jdbcType=VARCHAR},
+      P_TYPE = #{pType,jdbcType=VARCHAR},
+      BRAND = #{brand,jdbcType=VARCHAR},
+      PIC = #{pic,jdbcType=VARCHAR},
+      P_NUM = #{pNum,jdbcType=DECIMAL},
+      PRICE = #{price,jdbcType=DECIMAL},
+      SALE = #{sale,jdbcType=DECIMAL},
+      INTRO = #{intro,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL}
+    where P_ID = #{pId,jdbcType=DECIMAL}
+  </update>
+</mapper>

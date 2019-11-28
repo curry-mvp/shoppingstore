@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.OrderinfoMapper" >
+  <resultMap id="BaseResultMap" type="entity.Orderinfo" >
+    <id column="O_ID" property="oId" jdbcType="DECIMAL" />
+    <result column="USERID" property="userid" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="ORDERTIME" property="ordertime" jdbcType="VARCHAR" />
+    <result column="PID" property="pid" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    O_ID, USERID, STATUS, ORDERTIME, PID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ORDERINFO
+    where O_ID = #{oId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ORDERINFO
+    where O_ID = #{oId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="entity.Orderinfo" >
+    insert into ORDERINFO (O_ID, USERID, STATUS, 
+      ORDERTIME, PID)
+    values (#{oId,jdbcType=DECIMAL}, #{userid,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, 
+      #{ordertime,jdbcType=VARCHAR}, #{pid,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Orderinfo" >
+    insert into ORDERINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oId != null" >
+        O_ID,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="ordertime != null" >
+        ORDERTIME,
+      </if>
+      <if test="pid != null" >
+        PID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oId != null" >
+        #{oId,jdbcType=DECIMAL},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="ordertime != null" >
+        #{ordertime,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.Orderinfo" >
+    update ORDERINFO
+    <set >
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="ordertime != null" >
+        ORDERTIME = #{ordertime,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        PID = #{pid,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where O_ID = #{oId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.Orderinfo" >
+    update ORDERINFO
+    set USERID = #{userid,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      ORDERTIME = #{ordertime,jdbcType=VARCHAR},
+      PID = #{pid,jdbcType=DECIMAL}
+    where O_ID = #{oId,jdbcType=DECIMAL}
+  </update>
+</mapper>

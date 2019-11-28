@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.AdmininfoMapper" >
+  <resultMap id="BaseResultMap" type="entity.Admininfo" >
+    <id column="AD_ID" property="adId" jdbcType="DECIMAL" />
+    <result column="AD_NAME" property="adName" jdbcType="VARCHAR" />
+    <result column="AD_PASSWORD" property="adPassword" jdbcType="VARCHAR" />
+    <result column="ROLE" property="role" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    AD_ID, AD_NAME, AD_PASSWORD, ROLE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ADMININFO
+    where AD_ID = #{adId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ADMININFO
+    where AD_ID = #{adId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="entity.Admininfo" >
+    insert into ADMININFO (AD_ID, AD_NAME, AD_PASSWORD, 
+      ROLE)
+    values (#{adId,jdbcType=DECIMAL}, #{adName,jdbcType=VARCHAR}, #{adPassword,jdbcType=VARCHAR}, 
+      #{role,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Admininfo" >
+    insert into ADMININFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adId != null" >
+        AD_ID,
+      </if>
+      <if test="adName != null" >
+        AD_NAME,
+      </if>
+      <if test="adPassword != null" >
+        AD_PASSWORD,
+      </if>
+      <if test="role != null" >
+        ROLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adId != null" >
+        #{adId,jdbcType=DECIMAL},
+      </if>
+      <if test="adName != null" >
+        #{adName,jdbcType=VARCHAR},
+      </if>
+      <if test="adPassword != null" >
+        #{adPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.Admininfo" >
+    update ADMININFO
+    <set >
+      <if test="adName != null" >
+        AD_NAME = #{adName,jdbcType=VARCHAR},
+      </if>
+      <if test="adPassword != null" >
+        AD_PASSWORD = #{adPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        ROLE = #{role,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where AD_ID = #{adId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.Admininfo" >
+    update ADMININFO
+    set AD_NAME = #{adName,jdbcType=VARCHAR},
+      AD_PASSWORD = #{adPassword,jdbcType=VARCHAR},
+      ROLE = #{role,jdbcType=DECIMAL}
+    where AD_ID = #{adId,jdbcType=DECIMAL}
+  </update>
+</mapper>

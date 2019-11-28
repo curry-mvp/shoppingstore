@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.OrderdetailMapper" >
+  <resultMap id="BaseResultMap" type="entity.Orderdetail" >
+    <id column="OD_ID" property="odId" jdbcType="DECIMAL" />
+    <result column="P_ID" property="pId" jdbcType="DECIMAL" />
+    <result column="OD_NUM" property="odNum" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    OD_ID, P_ID, OD_NUM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ORDERDETAIL
+    where OD_ID = #{odId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ORDERDETAIL
+    where OD_ID = #{odId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="entity.Orderdetail" >
+    insert into ORDERDETAIL (OD_ID, P_ID, OD_NUM
+      )
+    values (#{odId,jdbcType=DECIMAL}, #{pId,jdbcType=DECIMAL}, #{odNum,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Orderdetail" >
+    insert into ORDERDETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="odId != null" >
+        OD_ID,
+      </if>
+      <if test="pId != null" >
+        P_ID,
+      </if>
+      <if test="odNum != null" >
+        OD_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="odId != null" >
+        #{odId,jdbcType=DECIMAL},
+      </if>
+      <if test="pId != null" >
+        #{pId,jdbcType=DECIMAL},
+      </if>
+      <if test="odNum != null" >
+        #{odNum,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.Orderdetail" >
+    update ORDERDETAIL
+    <set >
+      <if test="pId != null" >
+        P_ID = #{pId,jdbcType=DECIMAL},
+      </if>
+      <if test="odNum != null" >
+        OD_NUM = #{odNum,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where OD_ID = #{odId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.Orderdetail" >
+    update ORDERDETAIL
+    set P_ID = #{pId,jdbcType=DECIMAL},
+      OD_NUM = #{odNum,jdbcType=DECIMAL}
+    where OD_ID = #{odId,jdbcType=DECIMAL}
+  </update>
+</mapper>
