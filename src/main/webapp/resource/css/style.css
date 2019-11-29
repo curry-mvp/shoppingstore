@@ -879,7 +879,7 @@ body {
 body .grain {
   -webkit-transform: scale(1) !important;
           transform: scale(1) !important;
-  /*background-image: url("../images/overlay.png");*/
+  background-image: url("../images/overlay.png");
   left: 0;
   right: 0;
   margin: auto;
