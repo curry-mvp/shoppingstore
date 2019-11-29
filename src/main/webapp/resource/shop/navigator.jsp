@@ -6,10 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page isELIgnored="false"%>
+<%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <html>
 <head>
@@ -18,25 +18,28 @@
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <link rel="stylesheet" href="<%=basePath%>resource/css/style.css">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
     <style>
-        body{
+        body {
             /*height: ;*/
 
         }
-        #myframe{
+
+        #myframe {
             display: none;
-            width:100%;
+            width: 100%;
             height: 1000px;
             border: 0;
             scrolling: no;
         }
-        #topImg{
+
+        #topImg {
             display: none;
-            position:fixed;
-            right:10px;
-            bottom:200px;
+            position: fixed;
+            right: 10px;
+            bottom: 200px;
         }
     </style>
 </head>
@@ -271,39 +274,43 @@
         </div>
     </div>
 </div>
-<iframe src="<%=basePath%>resource/shop/showProducts.jsp" id="myframe"></iframe>
+<iframe id="myframe"></iframe>
 <img src="<%=basePath%>resource/images/top.png" id="topImg">
 <script>
-$(function(){
-    /*一进入页面就发请求查询所有类别*/
-    $.ajax({
-        url:"selectAllP_type",
-        type:"post",
-        success:function (data) {
-            for(var i=0;i<data.length;i++){
-                var str= "           <div class='future_ui__piece'><span><a ><font color ='white' size='7'>"+data[i]+"</font></a></span>" +
-                    "                <div class='line'></div>" +
-                    "                <div class='tip'></div>" +
-                    "                </div>";
-                $(".pieces").prepend(str);
+    $(function () {
+
+        /*一进入页面就发请求查询所有类别*/
+        $.ajax({
+            url: "selectAllP_type",
+            type: "post",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var str = "           <div class='future_ui__piece'><span><a ><font color ='white' size='7'>" + data[i] + "</font></a></span>" +
+                        "                <div class='line'></div>" +
+                        "                <div class='tip'></div>" +
+                        "                </div>";
+                    $(".pieces").prepend(str);
+                }
             }
-        }
+        });
+
+
+        $(".pieces").on("click", ".future_ui__piece", function () {
+            // alert($(this).children().children().children().text());
+            var type = $(this).children().children().children().text();
+            $("#myframe").attr("src", "<%=basePath%>resource/shop/showProducts.jsp?p_type=" + type);
+            $(".intro").hide();
+            $("#myframe").show();
+            $("#topImg").show();
+        });
+
+
+        $("#topImg").click(function () {
+            $(".intro").show();
+            $("#myframe").hide(1000);
+            $("#topImg").hide();
+        })
     });
-
-
-    $(".pieces").on("click",".future_ui__piece",function () {
-        // alert($(this).children().children().children().text());
-        $(".intro").hide();
-        $("#myframe").show();
-        $("#topImg").show();
-    })
-
-    $("#topImg").click(function () {
-        $(".intro").show();
-        $("#myframe").hide(1000);
-        $("#topImg").hide();
-    })
-});
 </script>
 </body>
 </html>

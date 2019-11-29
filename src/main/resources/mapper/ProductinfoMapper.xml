@@ -22,6 +22,10 @@
     select distinct p_type from productinfo
   </select>
 
+  <select id="selectAllProductsByP_type" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from productinfo where p_type=#{p_type,jdbcType=VARCHAR}
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
