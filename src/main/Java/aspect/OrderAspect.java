@@ -3,7 +3,6 @@ package aspect;
 import entity.Orderdetail;
 import entity.Orderinfo;
 import entity.Userinfo;
-import mapper.OrderdetailMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;

@@ -103,7 +103,7 @@ public class ShopCarController {
         jedis.hmset(username, map);
     }
 
-    @RequestMapping("reduceItemsNum")
+    @RequestMapping("/reduceItemsNum")
     public void reduceItemsNum(@RequestParam String pid, @RequestParam String username, @RequestParam String pnum) {
         //获取jedis对象
         Jedis jedis = jedisPool.getResource();
