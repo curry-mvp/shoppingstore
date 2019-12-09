@@ -8,6 +8,10 @@ import java.util.List;
 public interface UserService {
         Userinfo selectByUsername(String username);
 
+        String selectEmailByUsername(String username);
+
+        int selectUidByUsername(String username);
+
         int deleteByPrimaryKey(Integer uId);
 
         int insert(Userinfo record);

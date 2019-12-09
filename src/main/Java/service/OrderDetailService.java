@@ -1,8 +1,8 @@
-package mapper;
+package service;
 
 import entity.Orderdetail;
 
-public interface OrderdetailMapper {
+public interface OrderDetailService {
 
     int deleteByPrimaryKey(Integer odId);
 
@@ -15,4 +15,5 @@ public interface OrderdetailMapper {
     int updateByPrimaryKeySelective(Orderdetail record);
 
     int updateByPrimaryKey(Orderdetail record);
+    
 }

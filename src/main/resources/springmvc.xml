@@ -16,7 +16,7 @@
     <!--组建扫描类路径-->
     <context:component-scan base-package="controller,serviceimpl"/>
     <!-- 启动AspectJ自动代理 -->
-    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!--对静态资源不进行处理，例如js,css,jpg等等 -->
     <mvc:default-servlet-handler />
@@ -67,21 +67,21 @@
 -->
     <!--<mvc:resources location="/WEB-INF/resource/"  mapping="/resource/**"  />-->
 
-    <!--<bean id="myAs" class="aspect.MyAspect2"></bean>
--->
- <!--   &lt;!&ndash;aop:config标签用来配置有关切面的配置  &ndash;&gt;
+    <bean id="myAs" class="aspect.OrderAspect"></bean>
+
+ <!--&lt;!&ndash;aop:config标签用来配置有关切面的配置  &ndash;&gt;-->
     <aop:config>
-        &lt;!&ndash; 设置切点表达式 以便下面引用 &ndash;&gt;
-        <aop:pointcut expression="execution(* controller.*.*(..))" id="cut"/>
-        &lt;!&ndash; 配置切面所用的bean 和优先级 &ndash;&gt;
+        <!--&lt;!&ndash; 设置切点表达式 以便下面引用 &ndash;&gt;-->
+        <aop:pointcut expression="execution(* controller.ShopCarController.deleteProductNum(..))" id="cut"/>
+        <!--&lt;!&ndash; 配置切面所用的bean 和优先级 &ndash;&gt;-->
         <aop:aspect ref="myAs" order="1" >
-            &lt;!&ndash; 配置切面方法 &ndash;&gt;
+            <!--&lt;!&ndash; 配置切面方法 &ndash;&gt;-->
             <aop:before method="beforeCheck" pointcut-ref="cut"/>
             <aop:after method="afterCheck"  pointcut-ref="cut"/>
             <aop:after-returning method="afterReturn" pointcut-ref="cut" returning="res"/>
             <aop:after-throwing method="afterThrow" pointcut-ref="cut" throwing="ex"/>
             <aop:around method="around" pointcut-ref="cut"/>
         </aop:aspect>
-    </aop:config>-->
+    </aop:config>
 
 </beans>

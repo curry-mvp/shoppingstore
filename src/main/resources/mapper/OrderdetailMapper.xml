@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mapper.OrderdetailMapper" >
   <resultMap id="BaseResultMap" type="entity.Orderdetail" >
-    <id column="OD_ID" property="odId" jdbcType="DECIMAL" />
+    <result column="OD_ID" property="odId" jdbcType="DECIMAL" />
     <result column="P_ID" property="pId" jdbcType="DECIMAL" />
     <result column="OD_NUM" property="odNum" jdbcType="DECIMAL" />
   </resultMap>
@@ -10,7 +10,7 @@
     OD_ID, P_ID, OD_NUM
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from ORDERDETAIL
     where OD_ID = #{odId,jdbcType=DECIMAL}

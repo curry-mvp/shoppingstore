@@ -1,8 +1,8 @@
-package mapper;
+package service;
 
 import entity.Orderinfo;
 
-public interface OrderinfoMapper {
+public interface OrderinfoService {
 
     int deleteByPrimaryKey(Integer oId);
 

@@ -22,6 +22,10 @@
     where O_ID = #{oId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="entity.Orderinfo" >
+    <selectKey keyProperty="oId" order="BEFORE" resultType="int">
+    select seq_orderinfo_o_id.nextval from dual
+    </selectKey>
+
     insert into ORDERINFO (O_ID, USERID, STATUS, 
       ORDERTIME, PID)
     values (#{oId,jdbcType=DECIMAL}, #{userid,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, 

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=basePath%>resource/css/resetcar.css">
     <link rel="stylesheet" href="<%=basePath%>resource/css/carts.css">
+    <link rel="stylesheet" href="<%=basePath%>resource/css/search.css">
 
 
     <style>
@@ -50,7 +51,6 @@
             top:20px;
             left:230px;
             background-color: #87CEFA;
-
         }
 
         body{
@@ -64,7 +64,6 @@
             right:0;
             top:0;
             z-index: 5;
-
         }
 
         #big{
@@ -76,11 +75,9 @@
             opacity: 0.8;
             position: fixed;
             z-index:100;
-
         }
 
         #MyDiv{
-
             display: none;
             width: 65%;
             height: 80%;
@@ -90,7 +87,6 @@
             top:8%;
             left: 16%;
             z-index:120;
-
         }
 
         .calBtn1:hover{
@@ -295,8 +291,23 @@
                     "pid":$(this).attr("pid")
                 }
             });
-
         });
+
+        $(".order_content").on("click",".sum",function () {
+            if($(this).val()<=0){
+                alert("该商品不能再少了");
+            }else{
+                $.ajax({
+                    url:"updateItemsNum",
+                    type:"post",
+                    data:{
+                        "pnum":$(this).val(),
+                        "username":getCookie("username"),
+                        "pid":$(this).attr("pid")
+                    }
+                })
+            }
+        })
 
         $(".cartBox").on("click",".reduce",function(){
             if($(this).next().val()<=1){
@@ -324,7 +335,6 @@
                     "pid":$(this).attr("pid")
                 }
             });
-
         });
 
         $(".cartBox").on("click",".delBtn",function(){
