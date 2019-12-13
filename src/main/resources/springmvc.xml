@@ -53,18 +53,20 @@
             &lt;!&ndash; 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法  &ndash;&gt;
 
     </mvc:interceptors>
+    -->
 
     <mvc:interceptors>
             <mvc:interceptor>
-                    &lt;!&ndash;/*表示拦截所有请求,如果想拦截以某个名字(abc)结尾的请求path里写/*/abc,如果想拦截以某个名字(abc)开头的请求,path里写/abc/* &ndash;&gt;
-                    <mvc:mapping path="/*" />
-                    &lt;!&ndash; 排除拦截的地址 &ndash;&gt;
-                    &lt;!&ndash;  <mvc:exclude-mapping path="/*/login"/> 不拦截login结尾的请求 &ndash;&gt;
-                    <bean id="commonInterceptor2" class="interceptor.MyInterception "></bean> &lt;!&ndash;这个类就是我们自定义的Interceptor &ndash;&gt;
+                    <!--&lt;!&ndash;/*表示拦截所有请求,如果想拦截以某个名字(abc)结尾的请求path里写/*/abc,如果想拦截以某个名字(abc)开头的请求,path里写/abc/* &ndash;&gt;-->
+                    <mvc:mapping path="/selectAllP_type" />
+                    <!--&lt;!&ndash; 排除拦截的地址 &ndash;&gt;-->
+                    <!--&lt;!&ndash;  <mvc:exclude-mapping path="/*/login"/> 不拦截login结尾的请求 &ndash;&gt;-->
+                    <bean id="commonInterceptor2" class="interceptor.MyInterception "></bean>
+                <!--&lt;!&ndash;这个类就是我们自定义的Interceptor &ndash;&gt;-->
             </mvc:interceptor>
 
     </mvc:interceptors>
--->
+
     <!--<mvc:resources location="/WEB-INF/resource/"  mapping="/resource/**"  />-->
 
     <bean id="myAs" class="aspect.OrderAspect"></bean>
@@ -83,5 +85,15 @@
             <aop:around method="around" pointcut-ref="cut"/>
         </aop:aspect>
     </aop:config>
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8" />
+        <!-- 指定所上传文件的总大小,单位字节。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+        <property name="maxUploadSize" value="10240000" />
+        <property name="resolveLazily" value="true"/>
+
+    </bean>
+
 
 </beans>

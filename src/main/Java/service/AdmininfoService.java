@@ -1,8 +1,8 @@
-package mapper;
+package service;
 
 import entity.Admininfo;
 
-public interface AdmininfoMapper {
+public interface AdmininfoService {
     int deleteByPrimaryKey(Integer adId);
 
     int insert(Admininfo record);

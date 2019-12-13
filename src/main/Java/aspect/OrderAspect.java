@@ -32,7 +32,6 @@ public class OrderAspect {
       /*  Signature sig=joinPoint.getSignature();
         //+joinPoint.getArgs()[0]
         System.out.println("before at "+sig.getName()+"and arg[0] is ");*/
-
     }
 
     /*
@@ -44,7 +43,6 @@ public class OrderAspect {
      /*   Signature sig=joinPoint.getSignature();
 //+joinPoint.getArgs()[0]
         System.out.println("After at "+sig.getName()+"and arg[0] is ");*/
-
     }
 
     /*
@@ -76,7 +74,6 @@ public class OrderAspect {
         }
         Signature sig = joinPoint.getSignature();
         System.out.println("After at " + sig.getName() + "return. res= " + res);
-
     }
 
     /*
@@ -103,11 +100,9 @@ public class OrderAspect {
 
         System.out.println(methodName + " 执行前(前置通知)");
         try {
-
             res = pJoinPoint.proceed();
             System.out.println(methodName + " 执行后有结果(返回通知)");
         } catch (Throwable e) {
-
             System.out.println("异常通知 " + e.getMessage());
         }
         System.out.println(methodName + " 执行后(后置通知)");

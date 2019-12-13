@@ -22,8 +22,12 @@
     select distinct p_type from productinfo
   </select>
 
+  <!--就是页面给页面传参数-->
   <select id="selectAllProductsByP_type" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List" /> from productinfo where p_type=#{p_type,jdbcType=VARCHAR}
+    select * from(
+    select t.*,rownum rn from (
+    select * from productinfo where p_type=#{p_type,jdbcType=VARCHAR}) t where rownum&lt;=#{page,jdbcType=DECIMAL}*12)
+    where rn>=(#{page,jdbcType=DECIMAL}-1)*12+1
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -32,11 +36,54 @@
     from PRODUCTINFO
     where P_ID = #{pId,jdbcType=DECIMAL}
   </select>
+
+
+  <select id="selectupProducts" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PRODUCTINFO
+    WHERE status=0 order by P_ID
+    /*status='1'*/
+  </select>
+
+  <select id="selectdownProduct" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from PRODUCTINFO where status=1
+  </select>
+
+  <!--自行添加-->
+  <select id="selectOnOrders" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PRODUCTINFO
+    WHERE status='0' order by P_ID/*status='1'*/
+  </select>
+  <!--自行添加-->
+  <select id="selectUpOrders" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PRODUCTINFO
+    WHERE status='1' order by P_ID
+  </select>
+
+  <!--自行添加-->
+  <!--<select id="getOnProducts" resultMap="BaseResultMap">-->
+    <!--select <include refid="Base_Column_List" /> from productinfo where status='0' order by P_ID-->
+  <!--</select>-->
+
+  <!--自行添加-->
+  <!--<select id="OnProduct" resultMap="BaseResultMap">-->
+    <!--select <include refid="Base_Column_List" /> from productinfo where status='1' order by P_ID-->
+  <!--</select>-->
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from PRODUCTINFO
     where P_ID = #{pId,jdbcType=DECIMAL}
   </delete>
+
   <insert id="insert" parameterType="entity.Productinfo" >
+    <selectKey keyProperty="pId" order="BEFORE" resultType="int">
+      select seq_productinfo_p_id.nextval from dual
+    </selectKey>
     insert into PRODUCTINFO (P_ID, P_CODE, P_NAME, 
       P_TYPE, BRAND, PIC, 
       P_NUM, PRICE, SALE, 
@@ -47,6 +94,9 @@
       #{intro,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="entity.Productinfo" >
+    <selectKey keyProperty="pId" order="BEFORE" resultType="int">
+      select seq_productinfo_p_id.nextval from dual
+    </selectKey>1
     insert into PRODUCTINFO
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="pId != null" >

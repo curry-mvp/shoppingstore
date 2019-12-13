@@ -59,9 +59,36 @@
 <script>
     $(function(){
         $(".tcdPageCode").createPage({
-            pageCount: 100,
+            pageCount: 10,
             current: 1,
             backFn: function(p) {
+                $.ajax({
+                    url:"selectAllProductsByP_type",
+                    type:"post",
+                    data:{
+                        "p_type":getQueryString("p_type"),
+                        "page":p
+                    },
+                    success:function(data){
+                        $(".grid").html('');
+                        for(var i=0;i<data.length;i++){
+                            var str="<div class='product'>" +
+                                "            <div class='product__info'>" +
+                                "                <img class='product__image' src='<%=basePath%>resource/images/1.png' alt='Product 1' />" +
+                                "                <h3 class='product__title'>"+data[i].pName+"</h3>" +
+                                "                <span class='product__region extra highlight'>"+data[i].intro+"</span>" +
+                                "                <span class='product__price highlight'>"+data[i].price+"</span>" +
+                                "                <button class='action action--button action--buy' pid='"+data[i].pId+"'><i class='fa fa-shopping-cart'></i><span class='action__text cd-add-to-cart'>加入购物车</span></button>" +
+                                "            </div>" +
+                                "            <label class='action action--compare-add'><input class='check-hidden' type='checkbox' /><i class='fa fa-plus'></i><i class='fa fa-check'></i><span class='action__text action__text--invisible'>比较商品</span></label>'" +
+                                "        </div>";
+
+                            $(".grid").append(str);
+                        }
+                        loadjscssfile("<%=basePath%>resource/js/classie.js","js");
+                        loadjscssfile("<%=basePath%>resource/js/main.js","js");
+                    }
+                });
             }
         });
 
@@ -69,10 +96,10 @@
             url:"selectAllProductsByP_type",
             type:"post",
             data:{
-                "p_type":getQueryString("p_type")
+                "p_type":getQueryString("p_type"),
+                "page":1
             },
             success:function(data){
-
                 for(var i=0;i<data.length;i++){
                     var str="<div class='product'>" +
                         "            <div class='product__info'>" +

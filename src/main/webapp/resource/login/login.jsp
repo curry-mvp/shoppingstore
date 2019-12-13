@@ -120,7 +120,7 @@
                         } else if (data == "yes") {
                             //跳转页面
                             $("#msg").html("登录成功")
-                            window.location.href = "<%=basePath%>resource/shop/navigator.jsp?username="+$("#username1").val();
+                            window.location.href = "<%=basePath%>resource/shop/navigator.jsp?username=";
                         } else {
                             $("#msg").html("用户名或密码错误!");
                         }
